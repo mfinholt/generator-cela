@@ -10,7 +10,8 @@ var fs        = require('fs')
   , genUtils  = require('../util.js')
   , yeoman    = require('yeoman-generator')
   , chalk     = require('chalk')
-  , wiredep   = require('wiredep');
+  , wiredep   = require('wiredep')
+  , _         = require('underscore.string');
 
 
 /**
@@ -24,7 +25,7 @@ var CelaGenerator = yeoman.generators.Base.extend({
   init: function () {
     this.argument('name', { type: String, required: false });
     this.appname = this.name || path.basename(process.cwd());
-    this.appname = this._.camelize(this._.slugify(this._.humanize(this.appname)));
+    this.appname = _.camelize(_.slugify(_.humanize(this.appname)));
 
     this.option('app-suffix', {
       desc: 'Allow a custom suffix to be added to the module name',
@@ -260,7 +261,7 @@ var CelaGenerator = yeoman.generators.Base.extend({
    * Stringify the angular modules used in the app
    */
   ngModules: function() {
-    this.filters = this._.defaults(this.config.get('filters'), {
+    this.filters = _.defaults(this.config.get('filters'), {
       material: true
     });
 

@@ -6,6 +6,7 @@ var chalk = require('chalk');
 var path = require('path');
 var exec = childProcess.exec;
 var spawn = childProcess.spawn;
+var _ = require('underscore.string');
 
 var Generator = module.exports = function Generator() {
   yeoman.generators.Base.apply(this, arguments);
@@ -16,7 +17,7 @@ var Generator = module.exports = function Generator() {
   } catch (e) {
     this.appname = path.basename(process.cwd());
   }
-  this.appname = this._.slugify(this.appname).split('-').join('');
+  this.appname = _.slugify(this.appname).split('-').join('');
   this.filters = this.config.get('filters') || {};
 };
 
@@ -32,7 +33,7 @@ Generator.prototype.askForName = function askForName() {
   }];
 
   this.prompt(prompts, function (props) {
-    this.deployedName = this._.slugify(props.deployedName).split('-').join('');
+    this.deployedName = _.slugify(props.deployedName).split('-').join('');
     done();
   }.bind(this));
 };

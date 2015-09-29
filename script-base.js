@@ -3,6 +3,7 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var angularUtils = require('./util.js');
+var _ = require('underscore.string');
 
 var Generator = module.exports = function Generator() {
   yeoman.generators.NamedBase.apply(this, arguments);
@@ -12,11 +13,11 @@ var Generator = module.exports = function Generator() {
   } catch (e) {
     this.appname = path.basename(process.cwd());
   }
-  this.appname = this._.slugify(this._.humanize(this.appname));
-  this.scriptAppName = this._.camelize(this.appname) + angularUtils.appName(this);
+  this.appname = _.slugify(_.humanize(this.appname));
+  this.scriptAppName = _.camelize(this.appname) + angularUtils.appName(this);
 
-  this.cameledName = this._.camelize(this.name);
-  this.classedName = this._.classify(this.name);
+  this.cameledName = _.camelize(this.name);
+  this.classedName = _.classify(this.name);
 
   this.filters = this.config.get('filters');
   this.sourceRoot(path.join(__dirname, '/templates'));
